@@ -10,9 +10,14 @@ const expressServer = http.createServer(app)
 const io = new Server(expressServer)
 
 io.on("connection",(socket)=>{
-    socket.on("sendMessage",(msg)=>{
-        io.emit("chat",(msg))
-    })
+
+    socket.join("kitchen-room")
+    io.sockets.in("kitchen-room").emit("cooking","fried rice is cooking")
+    io.sockets.in("kitchen-room").emit("boiling","Boiling water")
+
+    socket.join("bed-room")
+    io.sockets.in("bed-room").emit("fan","fan is rotating")
+    io.sockets.in("bed-room").emit("rest","I am taking rest")
 })
 
 app.get("/",(req,res)=>{

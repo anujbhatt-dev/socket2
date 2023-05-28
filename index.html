@@ -9,29 +9,7 @@
 </head>
 <body>
     <br><br>
-    <center><h1 id="myTime">Simple live chat App</h1></center>
-    <br><br><br>
-
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-6 col-12 col-lg-6">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="msg" >
-                    <button class="btn btn-info" onclick="sendData()">Send</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <br><br>
-
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-6 col-12 col-lg-6">
-                <u id="myList"></ul>
-            </div>
-        </div>
-    </div>
+    <center><h1 id="msg"></h1></center>
 
 
     <!-- <input type="text" name="name" id="name" />
@@ -40,17 +18,8 @@
     <script>
         let socket = io();
 
-        const sendData = ()=>{
-            const msg = document.getElementById("msg").value
-            document.getElementById("msg").value=""
-            socket.emit("sendMessage",msg)
-        }
-
-        socket.on("chat",(msg)=>{
-            let listItem = document.createElement('li')
-            listItem.textContent=msg
-            let list = document.getElementById('myList')
-            list.appendChild(listItem)
+        socket.on("boiling",(msg)=>{
+            document.getElementById("msg").innerHTML=msg
         })
 
 
