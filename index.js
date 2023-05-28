@@ -12,8 +12,9 @@ const io = new Server(expressServer)
 io.on("connection",(socket)=>{
 
     socket.join("kitchen-room")
-    io.sockets.in("kitchen-room").emit("cooking","fried rice is cooking")
-    io.sockets.in("kitchen-room").emit("boiling","Boiling water")
+    let size= io.sockets.adapter.rooms.get("kitchen-room").size
+    io.sockets.in("kitchen-room").emit("cooking","fried rice is cooking "+size)
+    io.sockets.in("kitchen-room").emit("boiling","Boiling water "+size)
 
     socket.join("bed-room")
     io.sockets.in("bed-room").emit("fan","fan is rotating")
